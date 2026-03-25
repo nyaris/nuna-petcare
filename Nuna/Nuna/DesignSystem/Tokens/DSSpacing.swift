@@ -1,0 +1,15 @@
+//
+//  DSSpacing.swift
+//  Nuna
+//
+//  Created by nana on 24/03/26.
+//
+
+import CoreFoundation
+
+enum DSSpacing {
+    static let xs: CGFloat = 4
+    static let sm: CGFloat = 8
+    static let md: CGFloat = 16
+    static let lg: CGFloat = 24
+}
