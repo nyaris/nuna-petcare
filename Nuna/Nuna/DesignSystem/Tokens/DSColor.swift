@@ -41,6 +41,7 @@ enum DSColor {
         static let secondary = Color(hex: "#E5A5B2")   // rosa claro
         static let primaryLight = Color(hex: "#F3D1D8") // rosa bem suave
         static let primarySoft = Color(hex: "#F8E4E8")    // rosa quase background
+        static let secondaryNude = Color(hex: "#D3D3D3")   // cinza claro
     }
 
     // MARK: - Text

@@ -8,6 +8,6 @@
 import SwiftUI
 
 enum DSTypography {
-    static let title = Font.system(size: 22, weight: .semibold)
+    static let title = Font.system(size: 24, weight: .bold)
     static let body = Font.system(size: 16)
 }

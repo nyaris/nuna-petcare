@@ -1,0 +1,10 @@
+//
+//  LoginHeaderItem.swift
+//  Nuna
+//
+//  Created by nana on 25/03/26.
+//
+
+struct LoginHeaderItem {
+    let imageName: String
+}
