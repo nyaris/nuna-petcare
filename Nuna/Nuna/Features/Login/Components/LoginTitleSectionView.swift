@@ -11,12 +11,12 @@ struct LoginTitleSectionView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Text("Caring Made Paw-sible")
+            Text(LoginConstants.Texts.caringPawSible)
                 .font(DSTypography.title)
                 .foregroundStyle(DSColor.Text.primary)
                 .multilineTextAlignment(.center)
 
-            Text("All-in-one app for your pet’s needs. Manage health, track activities, and find services easily.")
+            Text(LoginConstants.Texts.allInOneApp)
                 .font(DSTypography.body)
                 .foregroundStyle(DSColor.Text.secondary)
                 .multilineTextAlignment(.center)

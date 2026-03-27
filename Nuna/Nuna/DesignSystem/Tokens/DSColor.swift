@@ -64,6 +64,7 @@ enum DSColor {
     enum Border {
         static let light = Color(hex: "#E5E7EB")  // borda leve
         static let medium = Color(hex: "#D1D5DB") // borda padrão
+        static let soft = Color(hex: "#1F2937") // borda padrão
     }
 
     // MARK: - Icon

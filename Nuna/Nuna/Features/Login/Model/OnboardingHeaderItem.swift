@@ -5,6 +5,6 @@
 //  Created by nana on 25/03/26.
 //
 
-struct LoginHeaderItem {
+struct OnboardingHeaderItem {
     let imageName: String
 }

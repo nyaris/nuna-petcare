@@ -18,6 +18,9 @@ enum DSIcon: String {
     case arrowLeft
     case camera
     case upload
+    case mail
+    case lock
+    case google
 }
 
 extension DSIcon {
@@ -37,6 +40,9 @@ extension DSIcon {
         case .arrowLeft: return "arrow_left_icon"
         case .camera: return "camera_icon"
         case .upload: return "upload_icon"
+        case .mail: return "mail_icon"
+        case .lock: return "lock_icon"
+        case .google: return "google_icon"
         }
     }
 }

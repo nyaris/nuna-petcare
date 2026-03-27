@@ -9,4 +9,5 @@ enum DSButtonStyle {
     case primary
     case secondary
     case tertiary
+    case link
 }
