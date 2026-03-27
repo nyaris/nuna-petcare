@@ -91,5 +91,10 @@ enum DSColor {
             static let tertiary = Color(hex: "#D3D3D3")   // cinza claro
             static let text = Color(hex: "#FFFFFF")    // texto do botão
         }
+
+        enum TextField {
+            static let background = Color(hex: "#F9FAFB")
+            static let hint = Color(hex: "#BEBEBE")
+        }
     }
 }
