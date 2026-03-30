@@ -11,6 +11,7 @@ enum TextFieldStyle {
     case normal
     case big
     case dropdown(options: [String])
+    case secure
 }
 
 struct DSTextField: View {
@@ -21,6 +22,7 @@ struct DSTextField: View {
     @Binding var typedText: String
 
     @FocusState private var isTextFieldFocused: Bool
+    @State private var isSecure: Bool = true
 
     init(
         description: String,
@@ -42,12 +44,19 @@ struct DSTextField: View {
                 .font(DSTypography.body)
 
             switch style {
-            case .normal: normalStyleView
-            case .big: bigStyleView
-            case let .dropdown(options): dropdownStyleView(options: options)
+            case .normal:
+                normalStyleView
+            case .big:
+                bigStyleView
+            case let .dropdown(options):
+                dropdownStyleView(options: options)
+            case .secure:
+                secureStyleView
             }
         }
     }
+
+    // MARK: - Normal
 
     private var normalStyleView: some View {
         ZStack(alignment: .leading) {
@@ -65,6 +74,47 @@ struct DSTextField: View {
             }
         }
     }
+
+    // MARK: - Secure (Password)
+
+    private var secureStyleView: some View {
+        ZStack(alignment: .leading) {
+
+            HStack {
+                if isSecure {
+                    SecureField(hint, text: $typedText)
+                        .font(DSTypography.body)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                } else {
+                    TextField(hint, text: $typedText)
+                        .font(DSTypography.body)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                }
+
+                Button {
+                    isSecure.toggle()
+                } label: {
+                    Image(systemName: isSecure ? "eye.slash" : "eye")
+                        .foregroundColor(DSColor.Component.TextField.hint)
+                }
+            }
+            .padding(.leading, icon != nil ? 48 : 16)
+            .padding(.trailing, 16)
+            .frame(height: 50)
+            .focused($isTextFieldFocused)
+            .modifier(DSFieldModifier(isFocused: isTextFieldFocused))
+
+            if let icon {
+                Image(icon)
+                    .padding(.leading, 16)
+                    .foregroundColor(DSColor.Component.TextField.hint)
+            }
+        }
+    }
+
+    // MARK: - Big
 
     private var bigStyleView: some View {
         ZStack(alignment: .topLeading) {
@@ -84,6 +134,8 @@ struct DSTextField: View {
         }
         .modifier(DSFieldModifier(isFocused: isTextFieldFocused))
     }
+
+    // MARK: - Dropdown
 
     private func dropdownStyleView(options: [String]) -> some View {
         Menu {
@@ -108,28 +160,31 @@ struct DSTextField: View {
 }
 
 #Preview {
-    DSTextField(
-        description: "",
-        hint: "Email",
-        style: .normal,
-        icon: .cameraIcon
-    )
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
-    DSTextField(
-        description: "",
-        hint: "Password",
-        style: .normal,
-        icon: .cameraIcon
-    )
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
-    HStack {
-        DSTextField(description: "Age *", hint: "e.g., 2 years", style: .normal)
-            .padding(.leading, 16)
-        DSTextField(description: "Gender *", hint: "Gender", style: .dropdown(options: ["Male", "Female"]))
-            .padding(.trailing, 16)
+    VStack(spacing: 16) {
+        DSTextField(
+            description: "",
+            hint: "Email",
+            style: .normal,
+            icon: .mailIcon
+        )
+
+        DSTextField(
+            description: "",
+            hint: "Password",
+            style: .secure,
+            icon: .lockIcon
+        )
+
+        HStack {
+            DSTextField(description: "Age *", hint: "e.g., 2 years", style: .normal)
+            DSTextField(description: "Gender *", hint: "Gender", style: .dropdown(options: ["Male", "Female"]))
+        }
+
+        DSTextField(
+            description: "Additional Notes",
+            hint: "Any special information about your pet...",
+            style: .big
+        )
     }
-    DSTextField(description: "Additional Notes", hint: "Any special information about your pet...", style: .big)
-        .padding()
+    .padding()
 }
