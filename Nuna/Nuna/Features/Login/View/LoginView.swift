@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
 
     @State private var currentIndex = 0
+    @EnvironmentObject private var viewModel: LoginViewModel
 
     private let headerItems = [
         OnboardingHeaderItem(imageName: "boy-and-cat"),
@@ -28,16 +29,18 @@ struct LoginView: View {
                 )
                 LoginTitleSectionView()
                 VStack(spacing: 6) {
-                    DSTextField(description: String(), hint: LoginConstants.Texts.emailPlaceholder, icon: .mailIcon)
+                    DSTextField(description: String(), hint: LoginConstants.Texts.emailPlaceholder, icon: .mailIcon, typedText: $viewModel.email)
                         .padding(.vertical, .zero)
-                    DSTextField(description: String(), hint: LoginConstants.Texts.passwordPlaceholder, icon: .lockIcon)
+                    DSTextField(description: String(), hint: LoginConstants.Texts.passwordPlaceholder, style: .secure, icon: .lockIcon, typedText: $viewModel.password)
                         .padding(.vertical, .zero)
                 }
                 DSButton(title: LoginConstants.Texts.forgotPassword, style: .link, state: .normal) {
                     // TODO: Action forgot password
                 }.frame(maxWidth: .infinity, alignment: .trailing)
-                DSButton(title: LoginConstants.Texts.signInTitle, style: .primary, state: .normal) {
-                    // TODO: Action Sign In
+                DSButton(title: LoginConstants.Texts.signInTitle, style: .primary, state: viewModel.isLoading ? .loading : (viewModel.isValid ? .normal : .disabled)) {
+                    Task {
+                        await viewModel.login()
+                    }
                 }
                 DividerAndTextView(text: LoginConstants.Texts.orContinueWith)
                 DSButton(title: LoginConstants.Texts.signInWithGoogle, style: .secondary
@@ -64,4 +67,6 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(LoginViewModel())
+    
 }

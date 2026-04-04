@@ -13,7 +13,6 @@ enum DSIcon: String {
     case bag
     case users
     case user
-    case notifications
     case bell
     case arrowLeft
     case camera
@@ -35,7 +34,6 @@ extension DSIcon {
         case .bag: return "bag_icon"
         case .users: return "users_icon"
         case .user: return "user_icon"
-        case .notifications: return "notifications_icon"
         case .bell: return "bell_icon"
         case .arrowLeft: return "arrow_left_icon"
         case .camera: return "camera_icon"

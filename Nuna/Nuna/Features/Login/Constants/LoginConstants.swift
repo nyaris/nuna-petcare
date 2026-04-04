@@ -13,7 +13,7 @@ enum LoginConstants {
         static let passwordPlaceholder = "Password"
         static let signInTitle = "Sign In"
         static let signUpTitle = "Sign Up"
-        static let forgotPassword = "Forgot password"
+        static let forgotPassword = "Forgot password?"
         static let orContinueWith = "Or continue with"
         static let signInWithGoogle = "Sign in with Google"
         static let dontHaveAnAccount = "Don't have an account?"
